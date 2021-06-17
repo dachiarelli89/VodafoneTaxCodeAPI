@@ -52,6 +52,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     @Override
     public User parseUser(String taxCode) {
         User user = new User();
+        taxCode = taxCode.toUpperCase();
 
         log.info(String.format("Start parsing tax code --> %s", taxCode));
 

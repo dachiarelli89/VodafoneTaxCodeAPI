@@ -30,21 +30,21 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadCityFormatException.class)
-    public final ResponseEntity<Object> handleBadCityError(BadCityFormatException ex, final HttpServletRequest request) {
+    public final ResponseEntity<ErrorDTO> handleBadCityError(BadCityFormatException ex, final HttpServletRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadDateFormatException.class)
-    public final ResponseEntity<Object> handleBadDateError(BadDateFormatException ex, final HttpServletRequest request) {
+    public final ResponseEntity<ErrorDTO> handleBadDateError(BadDateFormatException ex, final HttpServletRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(UnprocessableDataException.class)
-    public final ResponseEntity<Object> handleUnprocessableData(UnprocessableDataException ex, final HttpServletRequest request) {
+    public final ResponseEntity<ErrorDTO> handleUnprocessableData(UnprocessableDataException ex, final HttpServletRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.UNPROCESSABLE_ENTITY);
         return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -56,25 +56,25 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> errorList = generateErrorList(ex);
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
         error.setErrors(errorList);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ErrorDTO>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ErrorDTO>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<ErrorDTO>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private List<String> generateErrorList(BindException ex){
