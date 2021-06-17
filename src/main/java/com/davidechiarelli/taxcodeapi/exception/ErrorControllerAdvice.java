@@ -77,6 +77,13 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<ErrorDTO>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<ErrorDTO> handleGenericException(Exception ex, final HttpServletRequest request) {
+        ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private List<String> generateErrorList(BindException ex){
         return ex.getBindingResult()
                 .getFieldErrors()
