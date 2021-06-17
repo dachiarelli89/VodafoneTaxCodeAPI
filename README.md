@@ -1,5 +1,5 @@
 # TAX Code API
-#### Vodafone Code Assessment by Davide Chiarelli
+#### Vodafone Code Assessment - by Davide Chiarelli
 
 This is an application that exposes a JSON API over HTTP that allows a client to extrapolate data from a
 tax code string.
