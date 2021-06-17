@@ -3,6 +3,7 @@ package com.davidechiarelli.taxcodeapi.service.impl;
 import com.davidechiarelli.taxcodeapi.Constants;
 import com.davidechiarelli.taxcodeapi.exception.BadCityFormatException;
 import com.davidechiarelli.taxcodeapi.exception.BadDateFormatException;
+import com.davidechiarelli.taxcodeapi.exception.UnprocessableDataException;
 import com.davidechiarelli.taxcodeapi.model.City;
 import com.davidechiarelli.taxcodeapi.model.User;
 import com.davidechiarelli.taxcodeapi.repository.CityRepository;
@@ -70,6 +71,12 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             throw new BadCityFormatException("Failed to find city defined with code --> " + taxCode.substring(11, 15));
         }
 
+        char controlLetter = generateControlLetters(new StringBuilder(taxCode.substring(0,15))).charAt(0);
+
+        if(taxCode.charAt(15) != controlLetter){
+            throw new UnprocessableDataException(String.format("Last Tax code char (%s) doesn't match with actual control letter %s", taxCode.charAt(15), controlLetter));
+        }
+
         log.info(String.format("Finish parsing tax code --> %s", user.toString()));
 
         return user;
@@ -130,8 +137,9 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
         if(cityModel.isPresent())
             return cityModel.get().getCodiceCatastale().toUpperCase();
-        else
+        else {
             throw new BadCityFormatException("City " + city + " doesn't exist.");
+        }
     }
 
     private String generateDayOfBirthLetters(User user) {

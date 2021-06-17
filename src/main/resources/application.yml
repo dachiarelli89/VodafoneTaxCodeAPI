@@ -1,4 +1,6 @@
+app:
+  apiVersion: @project.version@
+  apiTitle: Vodafone Tax Code API
+  apiDescription: This is an application that exposes a JSON API over HTTP that allows a client to extrapolate data from a tax code string and create a tax code from user data.
 server:
   port: 8080
-  error:
-    include-stacktrace: never

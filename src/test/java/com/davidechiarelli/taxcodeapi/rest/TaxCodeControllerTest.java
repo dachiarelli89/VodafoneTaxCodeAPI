@@ -148,6 +148,26 @@ class TaxCodeControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void calculateTaxCode400_handleBadCityError() throws Exception {
+        when(taxCodeService.calculateTaxCode(any())).thenReturn("a-valid-tax-code");
+
+        String jsonRequest="{\n" +
+                "  \"firstName\": \"Davide\",\n" +
+                "  \"lastName\": \"Chiarelli\",\n" +
+                "  \"gender\": \"M\",\n" +
+                "  \"dateOfBirth\": \"1989-12-18\",\n" +
+                "  \"cityOfBirth\": \"Mottola\",\n" +
+                "  \"provinceOfBirth\": \"TA\"\n" +
+                "}";
+
+        mockMvc.perform(post("/calculateTaxCode")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonRequest)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
     private User getUser1(){
         return new User("Paolo",
                 "Neri",

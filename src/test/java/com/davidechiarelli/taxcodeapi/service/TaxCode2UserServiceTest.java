@@ -3,6 +3,7 @@ package com.davidechiarelli.taxcodeapi.service;
 
 import com.davidechiarelli.taxcodeapi.exception.BadCityFormatException;
 import com.davidechiarelli.taxcodeapi.exception.BadDateFormatException;
+import com.davidechiarelli.taxcodeapi.exception.UnprocessableDataException;
 import com.davidechiarelli.taxcodeapi.model.City;
 import com.davidechiarelli.taxcodeapi.model.User;
 import com.davidechiarelli.taxcodeapi.repository.impl.CityReposytoryImpl;
@@ -105,6 +106,17 @@ class TaxCode2UserServiceTest {
         when(cityRepository.getCityByBelfioreCode(any())).thenReturn(getCityTest2());
 
         assertThatExceptionOfType(BadDateFormatException.class).isThrownBy(() -> {
+            service.parseUser(taxCode);
+        });
+    }
+
+    @Test
+    void testError_badcontrolletter(){
+        String taxCode = "VRDGPP84E13D862X";
+
+        when(cityRepository.getCityByBelfioreCode(any())).thenReturn(getCityTest2());
+
+        assertThatExceptionOfType(UnprocessableDataException.class).isThrownBy(() -> {
             service.parseUser(taxCode);
         });
     }

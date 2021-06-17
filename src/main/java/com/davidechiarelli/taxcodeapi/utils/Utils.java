@@ -9,7 +9,8 @@ import java.util.Optional;
 public class Utils {
     private Utils(){}
     public static boolean isVowel(char aChar){
-        return aChar == 'a' || aChar == 'e' || aChar == 'i' || aChar == 'o' || aChar == 'u';
+        return aChar == 'a' || aChar == 'e' || aChar == 'i' || aChar == 'o' || aChar == 'u'
+                || aChar == 'A' || aChar == 'E' || aChar == 'I' || aChar == 'O' || aChar == 'U';
     }
 
     public static Month getMonth(String aChar){
