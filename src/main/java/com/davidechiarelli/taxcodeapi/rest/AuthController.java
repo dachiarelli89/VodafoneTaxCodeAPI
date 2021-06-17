@@ -1,9 +1,12 @@
 package com.davidechiarelli.taxcodeapi.rest;
 
+import com.davidechiarelli.taxcodeapi.dto.ErrorDTO;
 import com.davidechiarelli.taxcodeapi.dto.TokenDTO;
 import com.davidechiarelli.taxcodeapi.dto.UserAccountDTO;
 import com.davidechiarelli.taxcodeapi.security.TokenProvider;
 import com.davidechiarelli.taxcodeapi.service.AuthenticationService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,12 @@ public class AuthController {
     }
 
     @PostMapping(value = "/auth/token", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns the JWT token"),
+            @ApiResponse(code = 400, message = "Bad request, adjust before retrying", response = ErrorDTO.class),
+            @ApiResponse(code = 404, message = "Not found. User or password provided are wrong", response = ErrorDTO.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDTO.class )
+    })
     public ResponseEntity<TokenDTO> generateToken(@Valid @RequestBody UserAccountDTO userAccountDTO) {
         UserDetails loadedUser = authenticationService.loadUserByUsername(userAccountDTO.getUsername());
 
