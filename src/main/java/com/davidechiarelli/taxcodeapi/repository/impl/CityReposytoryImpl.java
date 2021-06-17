@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.io.*;
 import java.util.Collections;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @Repository
 public class CityReposytoryImpl implements CityRepository {
-    private final Logger log = LogManager.getLogger(getClass());
+    Logger log = LogManager.getLogger(getClass());
 
     @Override
     public List<City> getAllCities() {
@@ -49,7 +50,10 @@ public class CityReposytoryImpl implements CityRepository {
 
     public Optional<City> getCityByBelfioreCode(String code) {
         List<City> cities = getAllCities();
-        return cities.stream().filter(city -> city.getCodiceCatastale().equalsIgnoreCase(code)).findFirst();
+        if(CollectionUtils.isEmpty(cities))
+            return Optional.empty();
+        else
+            return cities.stream().filter(city -> city.getCodiceCatastale().equalsIgnoreCase(code)).findFirst();
     }
 
     @Override

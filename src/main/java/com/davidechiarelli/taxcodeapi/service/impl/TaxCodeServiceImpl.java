@@ -197,7 +197,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         } else if (consonants.size() == 3) {
             firstNameLetters.append(consonants.get(0)).append(consonants.get(1)).append(consonants.get(2));
         } else {
-            consonants.forEach(letter -> firstNameLetters.append(letter));
+            consonants.forEach(firstNameLetters::append);
         }
 
         if (firstNameLetters.length() < 3) {

@@ -1,6 +1,8 @@
 # TAX Code API
 #### Vodafone Code Assessment by Davide Chiarelli
 
+[![Build Status](https://api.travis-ci.org/dachiarelli89/VodafoneTaxCodeAPI.svg?branch=master)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=coverage)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=bugs)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI)
+
 This is an application that exposes a JSON API over HTTP that allows a client to extrapolate data from a
 tax code string.
 It is able to parse italian tax codes using algorithm provided at this link: https://it.wikipedia.org/wiki/Codice_fiscale

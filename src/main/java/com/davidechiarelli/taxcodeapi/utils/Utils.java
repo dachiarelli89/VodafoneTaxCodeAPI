@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Utils {
+    private Utils(){}
     public static boolean isVowel(char aChar){
         return aChar == 'a' || aChar == 'e' || aChar == 'i' || aChar == 'o' || aChar == 'u';
     }

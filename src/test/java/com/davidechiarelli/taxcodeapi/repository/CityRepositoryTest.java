@@ -5,6 +5,11 @@ import com.davidechiarelli.taxcodeapi.repository.impl.CityReposytoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,11 +70,16 @@ class CityRepositoryTest {
     }
 
     @Test
-    void testError_fileNotFound() {
-        Optional<City> city = repository.getCityByName("New York");
+    void testError_fileNotFound() throws IOException {
+        Files.move(Paths.get("target/test-classes/files/cities.csv"), Paths.get("target/test-classes/files/cities"));
+        Files.move(Paths.get("target/classes/files/cities.csv"), Paths.get("target/classes/files/cities"));
+
+        Optional<City> city = repository.getCityByBelfioreCode("F784");
 
         assertThat(city)
-                .isNotNull()
                 .isNotPresent();
+
+        Files.move(Paths.get("target/test-classes/files/cities"), Paths.get("target/test-classes/files/cities.csv"));
+        Files.move(Paths.get("target/classes/files/cities"), Paths.get("target/classes/files/cities.csv"));
     }
 }
