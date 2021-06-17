@@ -1,6 +1,7 @@
 package com.davidechiarelli.taxcodeapi.rest;
 
 import com.davidechiarelli.taxcodeapi.security.TokenProvider;
+import com.davidechiarelli.taxcodeapi.service.AuthenticationService;
 import com.davidechiarelli.taxcodeapi.service.impl.AuthenticationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class AuthControllerTest {
     private AuthController apiController;
-    private AuthenticationServiceImpl service = mock(AuthenticationServiceImpl.class);
+    private AuthenticationService service = mock(AuthenticationServiceImpl.class);
     private TokenProvider tokenProvider = mock(TokenProvider.class);
 
     private MockMvc mockMvc;

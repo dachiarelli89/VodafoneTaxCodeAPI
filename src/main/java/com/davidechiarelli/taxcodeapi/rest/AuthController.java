@@ -3,7 +3,7 @@ package com.davidechiarelli.taxcodeapi.rest;
 import com.davidechiarelli.taxcodeapi.dto.TokenDTO;
 import com.davidechiarelli.taxcodeapi.dto.UserAccountDTO;
 import com.davidechiarelli.taxcodeapi.security.TokenProvider;
-import com.davidechiarelli.taxcodeapi.service.impl.AuthenticationServiceImpl;
+import com.davidechiarelli.taxcodeapi.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +19,10 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
     private TokenProvider tokenProvider;
-    private AuthenticationServiceImpl authenticationService;
+    private AuthenticationService authenticationService;
 
     @Autowired
-    AuthController(TokenProvider tokenProvider, AuthenticationServiceImpl authenticationService) {
+    AuthController(TokenProvider tokenProvider, AuthenticationService authenticationService) {
         this.tokenProvider = tokenProvider;
         this.authenticationService = authenticationService;
     }
