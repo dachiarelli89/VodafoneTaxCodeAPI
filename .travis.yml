@@ -1,0 +1,12 @@
+language: java
+jdk:
+  - openjdk11
+os:
+  - linux
+addons:
+  sonarcloud:
+    organization: "dachiarelli89"
+    token: ${SONAR_TOKEN}
+script:
+  - mvn clean install
+  - sonar-scanner

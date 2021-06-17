@@ -1,0 +1,130 @@
+package com.davidechiarelli.taxcodeapi;
+
+import java.time.Month;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Constants {
+    public static final Map<Character, Month> MONTH_MAP = new HashMap<>();
+    public static final Map<Character, Integer> ODD_CHAR_MAP = new HashMap<>();
+    public static final Map<Character, Integer> EVEN_CHAR_MAP = new HashMap<>();
+    public static final Map<Integer, Character> CONTROL_CHAR_MAP = new HashMap<>();
+
+    private Constants(){}
+    
+    static {
+        MONTH_MAP.put('a', Month.JANUARY);
+        MONTH_MAP.put('b', Month.FEBRUARY);
+        MONTH_MAP.put('c', Month.MARCH);
+        MONTH_MAP.put('d', Month.APRIL);
+        MONTH_MAP.put('e', Month.MAY);
+        MONTH_MAP.put('h', Month.JUNE);
+        MONTH_MAP.put('l', Month.JULY);
+        MONTH_MAP.put('m', Month.AUGUST);
+        MONTH_MAP.put('p', Month.SEPTEMBER);
+        MONTH_MAP.put('r', Month.OCTOBER);
+        MONTH_MAP.put('s', Month.NOVEMBER);
+        MONTH_MAP.put('t', Month.DECEMBER);
+
+        ODD_CHAR_MAP.put('0', 1);
+        ODD_CHAR_MAP.put('1', 0);
+        ODD_CHAR_MAP.put('2', 5);
+        ODD_CHAR_MAP.put('3', 7);
+        ODD_CHAR_MAP.put('4', 9);
+        ODD_CHAR_MAP.put('5', 13);
+        ODD_CHAR_MAP.put('6', 15);
+        ODD_CHAR_MAP.put('7', 17);
+        ODD_CHAR_MAP.put('8', 19);
+        ODD_CHAR_MAP.put('9', 21);
+        ODD_CHAR_MAP.put('A', 1);
+        ODD_CHAR_MAP.put('B', 0);
+        ODD_CHAR_MAP.put('C', 5);
+        ODD_CHAR_MAP.put('D', 7);
+        ODD_CHAR_MAP.put('E', 9);
+        ODD_CHAR_MAP.put('F', 13);
+        ODD_CHAR_MAP.put('G', 15);
+        ODD_CHAR_MAP.put('H', 17);
+        ODD_CHAR_MAP.put('I', 19);
+        ODD_CHAR_MAP.put('J', 21);
+        ODD_CHAR_MAP.put('K', 2);
+        ODD_CHAR_MAP.put('L', 4);
+        ODD_CHAR_MAP.put('M', 18);
+        ODD_CHAR_MAP.put('N', 20);
+        ODD_CHAR_MAP.put('O', 11);
+        ODD_CHAR_MAP.put('P', 3);
+        ODD_CHAR_MAP.put('Q', 6);
+        ODD_CHAR_MAP.put('R', 8);
+        ODD_CHAR_MAP.put('S', 12);
+        ODD_CHAR_MAP.put('T', 14);
+        ODD_CHAR_MAP.put('U', 16);
+        ODD_CHAR_MAP.put('V', 10);
+        ODD_CHAR_MAP.put('W', 22);
+        ODD_CHAR_MAP.put('X', 25);
+        ODD_CHAR_MAP.put('Y', 24);
+        ODD_CHAR_MAP.put('Z', 23);
+
+        EVEN_CHAR_MAP.put('0', 0);
+        EVEN_CHAR_MAP.put('1', 1);
+        EVEN_CHAR_MAP.put('2', 2);
+        EVEN_CHAR_MAP.put('3', 3);
+        EVEN_CHAR_MAP.put('4', 4);
+        EVEN_CHAR_MAP.put('5', 5);
+        EVEN_CHAR_MAP.put('6', 6);
+        EVEN_CHAR_MAP.put('7', 7);
+        EVEN_CHAR_MAP.put('8', 8);
+        EVEN_CHAR_MAP.put('9', 9);
+        EVEN_CHAR_MAP.put('A', 0);
+        EVEN_CHAR_MAP.put('B', 1);
+        EVEN_CHAR_MAP.put('C', 2);
+        EVEN_CHAR_MAP.put('D', 3);
+        EVEN_CHAR_MAP.put('E', 4);
+        EVEN_CHAR_MAP.put('F', 5);
+        EVEN_CHAR_MAP.put('G', 6);
+        EVEN_CHAR_MAP.put('H', 7);
+        EVEN_CHAR_MAP.put('I', 8);
+        EVEN_CHAR_MAP.put('J', 9);
+        EVEN_CHAR_MAP.put('K', 10);
+        EVEN_CHAR_MAP.put('L', 11);
+        EVEN_CHAR_MAP.put('M', 12);
+        EVEN_CHAR_MAP.put('N', 13);
+        EVEN_CHAR_MAP.put('O', 14);
+        EVEN_CHAR_MAP.put('P', 15);
+        EVEN_CHAR_MAP.put('Q', 16);
+        EVEN_CHAR_MAP.put('R', 17);
+        EVEN_CHAR_MAP.put('S', 18);
+        EVEN_CHAR_MAP.put('T', 19);
+        EVEN_CHAR_MAP.put('U', 20);
+        EVEN_CHAR_MAP.put('V', 21);
+        EVEN_CHAR_MAP.put('W', 22);
+        EVEN_CHAR_MAP.put('X', 23);
+        EVEN_CHAR_MAP.put('Y', 24);
+        EVEN_CHAR_MAP.put('Z', 25);
+
+        CONTROL_CHAR_MAP.put(0, 'A');
+        CONTROL_CHAR_MAP.put(1, 'B');
+        CONTROL_CHAR_MAP.put(2, 'C');
+        CONTROL_CHAR_MAP.put(3, 'D');
+        CONTROL_CHAR_MAP.put(4, 'E');
+        CONTROL_CHAR_MAP.put(5, 'F');
+        CONTROL_CHAR_MAP.put(6, 'G');
+        CONTROL_CHAR_MAP.put(7, 'H');
+        CONTROL_CHAR_MAP.put(8, 'I');
+        CONTROL_CHAR_MAP.put(9, 'J');
+        CONTROL_CHAR_MAP.put(10, 'K');
+        CONTROL_CHAR_MAP.put(11, 'L');
+        CONTROL_CHAR_MAP.put(12, 'M');
+        CONTROL_CHAR_MAP.put(13, 'N');
+        CONTROL_CHAR_MAP.put(14, 'O');
+        CONTROL_CHAR_MAP.put(15, 'P');
+        CONTROL_CHAR_MAP.put(16, 'Q');
+        CONTROL_CHAR_MAP.put(17, 'R');
+        CONTROL_CHAR_MAP.put(18, 'S');
+        CONTROL_CHAR_MAP.put(19, 'T');
+        CONTROL_CHAR_MAP.put(20, 'U');
+        CONTROL_CHAR_MAP.put(21, 'V');
+        CONTROL_CHAR_MAP.put(22, 'W');
+        CONTROL_CHAR_MAP.put(23, 'X');
+        CONTROL_CHAR_MAP.put(24, 'Y');
+        CONTROL_CHAR_MAP.put(25, 'Z');
+    }
+}

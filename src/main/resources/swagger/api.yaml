@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: 'TAX Code API'
+  version: '1.0.0-SNAPSHOT'
+  description: 'This API allows to create and parse an italian TAX code'
+paths:
+  /v1/taxcode2User:
+    post:
+      summary: 'Calculate a tax code'
+      description: 'This service parse data of an user from a tax code into request body'
+      operationId: ParseUser
+      tags:
+        - Tax Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxCode'
+      responses:
+        '200':
+          description: 'TAX code calculated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable entity'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: 'Error received from the backend'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/user2Taxcode:
+    post:
+      summary: 'Calculate a tax code'
+      description: 'This service calculate a tax code using data provided into request body'
+      operationId: CalculateTaxCode
+      tags:
+        - Tax Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'TAX code calculated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxCode'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: 'Error received from the backend'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TaxCode:
+      type: object
+      properties:
+        taxCode:
+          type: string
+    User:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - gender
+        - dateOfBirth
+        - cityOfBirth
+        - provinceOfBirth
+      properties:
+        firstName:
+          type: string
+          example: Carlo
+        lastName:
+          type: string
+          example: Verdi
+        gender:
+          type: string
+          enum: [ M,F ]
+        dateOfBirth:
+          type: string
+          format: date
+        cityOfBirth:
+          type: string
+          example: Milano
+        provinceOfBirth:
+          type: string
+          example: MI
+    Error:
+      type: object
+      properties:
+        'type':
+          type: string
+        'title':
+          type: string
+        'status':
+          type: number
+        'detail':
+          type: string
+        'path':
+          type: string
+        'message':
+          type: string
