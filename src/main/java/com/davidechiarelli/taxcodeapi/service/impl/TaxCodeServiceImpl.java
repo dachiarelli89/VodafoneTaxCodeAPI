@@ -75,7 +75,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         char controlLetter = generateControlLetters(new StringBuilder(taxCode.substring(0,15))).charAt(0);
 
         if(taxCode.charAt(15) != controlLetter){
-            throw new UnprocessableDataException(String.format("Last Tax code char (%s) doesn't match with actual control letter %s", taxCode.charAt(15), controlLetter));
+            throw new UnprocessableDataException(String.format("Last Tax code char '%s' doesn't match with actual control letter '%s'", taxCode.charAt(15), controlLetter));
         }
 
         log.info(String.format("Finish parsing tax code --> %s", user.toString()));
