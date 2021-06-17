@@ -20,7 +20,7 @@ cd VodafoneTaxCodeAPI
 
 ./mvnw clean install
 ```
-# Instructions to run the APP
+# Instructions to run the APP locally
 
 If you prefer to run the application, use the following command:
 ```sh
@@ -28,3 +28,10 @@ If you prefer to run the application, use the following command:
 ```
 The application should be reachable on 8080 port. 
 Once the application is started, the API documentation could be read [here](http://localhost:8080/swagger-ui.html), where is also possible to execute directly some calls to the APIs exposed via the Swagger Web UI. 
+
+
+# Instructions to use HEROKU instance of the APP 
+
+If you prefer to use the API deployed on an HEROKU instance you could use these links:
+- API endpoint: [https://vodafone-tax-code-api.herokuapp.com/](https://vodafone-tax-code-api.herokuapp.com/)
+- Swagger UI: [https://vodafone-tax-code-api.herokuapp.com/swagger-ui.html](https://vodafone-tax-code-api.herokuapp.com/swagger-ui.html)
