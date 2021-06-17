@@ -1,5 +1,5 @@
 # TAX Code API
-#### Vodafone Code Assessment by Davide Chiarelli
+#### Vodafone Code Assessment - by Davide Chiarelli
 
 [![Build Status](https://api.travis-ci.org/dachiarelli89/VodafoneTaxCodeAPI.svg?branch=master)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=coverage)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dachiarelli89_VodafoneTaxCodeAPI&metric=bugs)](https://sonarcloud.io/dashboard?id=dachiarelli89_VodafoneTaxCodeAPI)
 
