@@ -7,6 +7,8 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -21,6 +23,7 @@ public class CityReposytoryImpl implements CityRepository {
     Logger log = LogManager.getLogger(getClass());
 
     @Override
+    @Cacheable(value = "cities")
     public List<City> getAllCities() {
         try {
             ColumnPositionMappingStrategy<City> ms = new ColumnPositionMappingStrategy<>();
@@ -48,6 +51,7 @@ public class CityReposytoryImpl implements CityRepository {
         }
     }
 
+    @Cacheable(value = "city-code")
     public Optional<City> getCityByBelfioreCode(String code) {
         List<City> cities = getAllCities();
         if(CollectionUtils.isEmpty(cities))
@@ -57,6 +61,7 @@ public class CityReposytoryImpl implements CityRepository {
     }
 
     @Override
+    @Cacheable(value = "city-name")
     public Optional<City> getCityByName(String city) {
         List<City> cities = getAllCities();
 
