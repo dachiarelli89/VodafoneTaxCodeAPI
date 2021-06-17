@@ -41,7 +41,7 @@ class TaxCodeControllerTest {
                 "  \"provinceOfBirth\": \"TA\"\n" +
                 "}";
 
-        mockMvc.perform(post("/calculateTaxCode")
+        mockMvc.perform(post("/api/calculateTaxCode")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -60,7 +60,7 @@ class TaxCodeControllerTest {
                 "  \"provinceOfBirth\": \"TA\"\n" +
                 "}";
 
-        mockMvc.perform(post("/calculateTaxCode")
+        mockMvc.perform(post("/api/calculateTaxCode")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -80,7 +80,7 @@ class TaxCodeControllerTest {
                 "  \"provinceOfBirth\": \"TA\"\n" +
                 "}";
 
-        mockMvc.perform(post("/calculateTaxCode")
+        mockMvc.perform(post("/api/calculateTaxCode")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -96,7 +96,7 @@ class TaxCodeControllerTest {
                 "  \"taxCode\": \"NREPLA89M12H501H\"\n" +
                 "}";
 
-        mockMvc.perform(post("/parseUser")
+        mockMvc.perform(post("/api/parseUser")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -111,7 +111,7 @@ class TaxCodeControllerTest {
                 "  \"taxCode\": \"NREPLA89M12H501H\"\n" +
                 "}";
 
-        mockMvc.perform(post("/parseUser")
+        mockMvc.perform(post("/api/parseUser")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -126,7 +126,7 @@ class TaxCodeControllerTest {
                 "  \"taxCode\": \"\"\n" +
                 "}";
 
-        mockMvc.perform(post("/parseUser")
+        mockMvc.perform(post("/api/parseUser")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -141,7 +141,7 @@ class TaxCodeControllerTest {
                 "  \"taxCode\": \"NREPLA89M12H501HAAAAAAAAAAAAAAAAAAA\"\n" +
                 "}";
 
-        mockMvc.perform(post("/parseUser")
+        mockMvc.perform(post("/api/parseUser")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))
@@ -161,7 +161,7 @@ class TaxCodeControllerTest {
                 "  \"provinceOfBirth\": \"TA\"\n" +
                 "}";
 
-        mockMvc.perform(post("/calculateTaxCode")
+        mockMvc.perform(post("/api/calculateTaxCode")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest)
                 .accept(MediaType.APPLICATION_JSON))

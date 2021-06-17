@@ -6,8 +6,10 @@ import com.davidechiarelli.taxcodeapi.mapper.UserMapper;
 import com.davidechiarelli.taxcodeapi.model.User;
 import com.davidechiarelli.taxcodeapi.service.TaxCodeService;
 import com.davidechiarelli.taxcodeapi.service.impl.TaxCodeServiceImpl;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
+@Api("TAX Code Controller")
 public class TaxCodeController {
     TaxCodeService service;
 
@@ -24,7 +27,7 @@ public class TaxCodeController {
         this.service = taxCodeService;
     }
 
-    @PostMapping("/calculateTaxCode")
+    @PostMapping(value = "/api/calculateTaxCode", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TaxCodeDTO> calculateTaxCode(@Valid @RequestBody UserDTO user) {
         String taxCode = service.calculateTaxCode(new UserMapper().mapFrom(user));
 
@@ -36,7 +39,7 @@ public class TaxCodeController {
         }
     }
 
-    @PostMapping("/parseUser")
+    @PostMapping(value = "/api/parseUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> parseUser(@Valid @RequestBody TaxCodeDTO taxCode) {
         User user = service.parseUser(taxCode.getTaxCode());
 

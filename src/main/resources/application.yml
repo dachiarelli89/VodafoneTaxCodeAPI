@@ -2,5 +2,9 @@ app:
   apiVersion: @project.version@
   apiTitle: Vodafone Tax Code API
   apiDescription: This is an application that exposes a JSON API over HTTP that allows a client to extrapolate data from a tax code string and create a tax code from user data.
+  security:
+    enabled: true
+    secret: MDE1NDgwNmI2NjJmMDUyZWM3MzJiOWUwOWNmNGViNTliNDgyNzhiMWY0MWM0MWRlN2JkOGEwNDJiMGVlN2EwZGRmMjMzYmQwNjBkNmQzNTA3NWM3YWZkYjRiYTRjZWZmNzliZWY5OGU5ODE4ZWJkNmQxNjFjN2Q5YTc4ZGZmOGQ=
+    tokenValidity: 840000
 server:
   port: 8080

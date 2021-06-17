@@ -7,11 +7,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -40,6 +42,13 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public final ResponseEntity<ErrorDTO> handleBadDateError(BadDateFormatException ex, final HttpServletRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public final ResponseEntity<ErrorDTO> handleUserNotFound(UsernameNotFoundException ex, final HttpServletRequest request) {
+        ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
@@ -82,6 +91,13 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public final ResponseEntity<ErrorDTO> handleGenericException(Exception ex, final HttpServletRequest request) {
         ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(HttpClientErrorException.Forbidden.class)
+    public final ResponseEntity<ErrorDTO> test(HttpClientErrorException.Forbidden ex, final HttpServletRequest request) {
+        ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     private List<String> generateErrorList(BindException ex){
