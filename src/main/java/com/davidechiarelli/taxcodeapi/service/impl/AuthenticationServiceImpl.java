@@ -13,6 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This is a dummy class wich provides a mock for a user account service, to manage JWT authentication
+ *
+ */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private List<User> users;

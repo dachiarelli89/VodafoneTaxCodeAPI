@@ -5,6 +5,6 @@ app:
   security:
     enabled: true
     secret: MDE1NDgwNmI2NjJmMDUyZWM3MzJiOWUwOWNmNGViNTliNDgyNzhiMWY0MWM0MWRlN2JkOGEwNDJiMGVlN2EwZGRmMjMzYmQwNjBkNmQzNTA3NWM3YWZkYjRiYTRjZWZmNzliZWY5OGU5ODE4ZWJkNmQxNjFjN2Q5YTc4ZGZmOGQ=
-    tokenValidity: 840000
+    tokenValidity: 1800000
 server:
   port: 8080

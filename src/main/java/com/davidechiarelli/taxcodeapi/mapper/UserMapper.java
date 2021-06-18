@@ -4,6 +4,10 @@ package com.davidechiarelli.taxcodeapi.mapper;
 import com.davidechiarelli.taxcodeapi.dto.UserDTO;
 import com.davidechiarelli.taxcodeapi.model.User;
 
+/**
+ * This class is used to map model to dto objects
+ */
+
 public class UserMapper {
 
     public UserDTO mapToDTO(User user){

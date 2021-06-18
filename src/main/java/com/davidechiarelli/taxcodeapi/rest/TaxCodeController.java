@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * This controller class exposes the two main services of the API, calculateTaxCode and parseUser
+ */
+
 @RestController
 @Api("TAX Code Controller")
 public class TaxCodeController {

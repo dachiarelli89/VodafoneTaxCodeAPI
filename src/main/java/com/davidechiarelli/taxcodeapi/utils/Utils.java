@@ -9,11 +9,13 @@ import java.util.Optional;
 
 public class Utils {
     private Utils(){}
+
     public static boolean isVowel(char aChar){
         return aChar == 'a' || aChar == 'e' || aChar == 'i' || aChar == 'o' || aChar == 'u'
                 || aChar == 'A' || aChar == 'E' || aChar == 'I' || aChar == 'O' || aChar == 'U';
     }
 
+    // This method convert a Month object into the tax code month char
     public static Month getMonth(String aChar){
         return Constants.MONTH_MAP.get(aChar.charAt(0));
     }
@@ -23,11 +25,7 @@ public class Utils {
         return optionalCharacter.isPresent() ? optionalCharacter.get().getKey() : ' ';
     }
 
-    public static boolean isANameChar(char aLetter){
-        String letterString = String.valueOf(aLetter);
-        return letterString.matches("\\w+\\.?");
-    }
-
+    // This method clen a string leaving only alphanumeric chars
     public static String cleanString(String original) {
         String clean = Normalizer.normalize(original, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
         clean = clean.replaceAll("[^a-zA-Z]", "");

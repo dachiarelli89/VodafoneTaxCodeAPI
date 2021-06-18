@@ -15,6 +15,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class is used to define the Swagger UI component
+ */
+
 @Configuration
 public class SwaggerConfig {
     @Value("${app.apiTitle}")

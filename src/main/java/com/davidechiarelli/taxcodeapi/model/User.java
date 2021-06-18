@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * Model class for Users
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

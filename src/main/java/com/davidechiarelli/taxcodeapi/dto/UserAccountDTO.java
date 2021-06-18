@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * DTO to manage user accounts for security
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

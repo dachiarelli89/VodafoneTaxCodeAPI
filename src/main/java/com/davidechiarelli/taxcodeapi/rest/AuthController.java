@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * This controller class exposes the service that create a token for a valid user
+ */
+
 @RestController
 public class AuthController {
     private TokenProvider tokenProvider;

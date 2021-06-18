@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+/**
+ * DTO to manage HTTP errors
+ */
+
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data

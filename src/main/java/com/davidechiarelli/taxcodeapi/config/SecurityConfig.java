@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
+/**
+ * This is the configuration class for Spring Security. It defines secured or insecured resources and defines a stateless connection with the client (for REST API)
+ */
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,8 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/v3/**").permitAll()
                 .and()
                 .apply(securityConfigurerAdapter());
-        http.csrf().disable().cors().disable();
-        http.headers().frameOptions().disable();
 
         if (securityEnabled)
             http.authorizeRequests().antMatchers("/api/**").authenticated();

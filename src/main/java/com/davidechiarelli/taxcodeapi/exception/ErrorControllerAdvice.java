@@ -26,6 +26,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This object intercepts all not catched exception, logs error and manage correct HTTP error code to return at the client
+ */
+
 @ControllerAdvice
 public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     Logger log = LoggerFactory.getLogger(getClass());

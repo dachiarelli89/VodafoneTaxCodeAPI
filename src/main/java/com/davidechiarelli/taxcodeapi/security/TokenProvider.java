@@ -23,6 +23,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+/**
+ * This class is used to generate and validate a JWT token, storing user data inside
+ */
+
 @Component
 public class TokenProvider {
 

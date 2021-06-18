@@ -3,6 +3,10 @@ package com.davidechiarelli.taxcodeapi.model;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
 
+/**
+ * Model class for cities
+ */
+
 @Data
 public class City {
     @CsvBindByPosition(position = 6)

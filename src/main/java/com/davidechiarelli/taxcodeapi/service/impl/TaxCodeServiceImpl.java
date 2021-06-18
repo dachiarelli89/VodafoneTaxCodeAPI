@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * This is a service class wich exposes 2 public methods calculateTaxCode and parseUser. The first calculate an italian tax code using user data,
+ * the second parse a tax code.
+ *
+ */
 @Service
 public class TaxCodeServiceImpl implements TaxCodeService {
     Logger log = LoggerFactory.getLogger(TaxCodeServiceImpl.class);
@@ -38,6 +44,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
         log.info(String.format("Start calculating tax code for --> %s", user.toString()));
 
+        // Calculate each piece of tax code
         taxCode.append(generateLastNameLetters(user));
         taxCode.append(generateFirstNameLetters(user));
         taxCode.append(generateYearOfBirthLetters(user));
@@ -58,15 +65,19 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
         log.info(String.format("Start parsing tax code --> %s", taxCode));
 
+        // It's imposibble to estrapolate name and surname, so these fields are copied as is
         user.setLastName(taxCode.substring(0, 3));
         user.setFirstName(taxCode.substring(3, 6));
 
-        int dayOfBirth = calculateDay(taxCode.substring(9, 11));
         user.setDateOfBirth(calculateDOB(taxCode));
+        //Get number in day of birth position (used for gender)
+        int dayOfBirth = calculateDay(taxCode.substring(9, 11));
         user.setGender(dayOfBirth > 31 ? "F" : "M");
 
+        // Get city using belfiore code
         Optional<City> cityCSV = cityRepository.getCityByBelfioreCode(taxCode.substring(11, 15));
 
+        // If city exists set city name and province
         if (cityCSV.isPresent()) {
             user.setCityOfBirth(cityCSV.get().getDenominazione());
             user.setProvinceOfBirth(cityCSV.get().getSiglaProvincia());
@@ -74,8 +85,9 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             throw new BadCityFormatException("Failed to find city defined with code --> " + taxCode.substring(11, 15));
         }
 
+        // Using previous chars, this calculates last control letter
         char controlLetter = generateControlLetters(new StringBuilder(taxCode.substring(0, 15))).charAt(0);
-
+        // and checks if it is equal to the control letter
         if (taxCode.charAt(15) != controlLetter) {
             throw new UnprocessableDataException(String.format("Last Tax code char '%s' doesn't match with actual control letter '%s'", taxCode.charAt(15), controlLetter));
         }
@@ -91,6 +103,8 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         int day;
 
         try {
+            // This piece calculate the year, but it cannot determine the real century (ex. '05' could be 1905 but also 2005)
+            // for semplicity I consider that the century is 900'
             year = Integer.parseInt(taxCode.substring(6, 8)) + 1900;
         } catch (Exception e) {
             throw new BadDateFormatException("Cannot parse year " + taxCode.substring(6, 8), e);
@@ -102,10 +116,16 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             throw new BadDateFormatException("Cannot parse month " + taxCode.substring(8, 9), e);
         }
 
+        // Day could be greater than 31, so thi tax code is associated to a female
         int tempDay = calculateDay(taxCode.substring(9, 11));
         day = tempDay > 31 ? tempDay - 40 : tempDay;
 
-        return LocalDate.of(year, month, day);
+        try {
+            // Try to parse date, using LocalDate class
+            return LocalDate.of(year, month, day);
+        } catch (Exception e) {
+            throw new BadDateFormatException("Cannot parse date", e);
+        }
     }
 
     private int calculateDay(String dayString) {
@@ -121,6 +141,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         int sumOfValues = 0;
         int divisionMod = 0;
 
+        // Iterate on temporary tax value and sum even and odd position chars using conversion maps in Constants
         for (int counter = 0; counter < charsOfTaxCode.length; counter++) {
             if ((counter + 1) % 2 == 0) {
                 sumOfValues += Constants.EVEN_CHAR_MAP.get(charsOfTaxCode[counter]);
@@ -162,6 +183,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateLastNameLetters(User user) {
+        // This action allows to clean last name leaving only alhpanumeric chars
         String lastName = Utils.cleanString(Utils.cleanString(user.getLastName()));
 
         if (StringUtils.isBlank(lastName)) {
@@ -170,10 +192,12 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
         StringBuilder lastNameLetters = new StringBuilder();
 
+        // If surname lenght is lower than 3 fill the name with X
         if (lastName.length() < 3) {
             return String.format("%-3s", lastName).replace(' ', 'X').toUpperCase();
         }
 
+        // Iterate on surname considering only consonant, until the size of the string is 3
         for (char letter :
                 lastName.toCharArray()) {
             if (lastNameLetters.length() == 3)
@@ -185,6 +209,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             }
         }
 
+        // If the string size is lower than 3 then fills with the remaning vowels
         if (lastNameLetters.length() < 3) {
             fillWithVowel(lastNameLetters, lastName);
         }
@@ -193,6 +218,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateFirstNameLetters(User user) {
+        // This action allows to clean first name leaving only alhpanumeric chars
         String firstName = Utils.cleanString(Utils.cleanString(user.getFirstName()));
 
         if (StringUtils.isBlank(firstName)) {
@@ -202,10 +228,12 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         final StringBuilder firstNameLetters = new StringBuilder();
         List<Character> consonants = new ArrayList<>();
 
+        // If surname lenght is lower than 3 fill the name with X
         if (firstName.length() < 3) {
             return String.format("%-3s", firstName).replace(' ', 'X').toUpperCase();
         }
 
+        // Get consonants number
         for (char letter :
                 firstName.toCharArray()) {
             if (!Utils.isVowel(letter)) {
@@ -213,14 +241,16 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             }
         }
 
+        // and use it to apply these rules
         if (consonants.size() > 3) {
             firstNameLetters.append(consonants.get(0)).append(consonants.get(2)).append(consonants.get(3));
         } else if (consonants.size() == 3) {
             firstNameLetters.append(consonants.get(0)).append(consonants.get(1)).append(consonants.get(2));
         } else {
+            // if first name has less then 3 consonants so it concatenates them
             consonants.forEach(firstNameLetters::append);
         }
-
+        // and fills with vowels
         if (firstNameLetters.length() < 3) {
             fillWithVowel(firstNameLetters, firstName);
         }
@@ -228,6 +258,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         return firstNameLetters.toString().toUpperCase();
     }
 
+    // This methods fills nameLetters with vowels in name until its lenght is 3
     private StringBuilder fillWithVowel(StringBuilder nameLetters, String name) {
         for (char letter :
                 name.toCharArray()) {

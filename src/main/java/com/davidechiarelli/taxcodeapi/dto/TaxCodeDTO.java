@@ -8,6 +8,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO to manage Tax code
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

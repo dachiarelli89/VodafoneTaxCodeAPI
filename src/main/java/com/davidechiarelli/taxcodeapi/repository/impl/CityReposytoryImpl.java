@@ -17,6 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This repository class is used to read cities from files. It implements an interface, so in the future this could be replaced with a DBMS interface
+ */
+
 @Repository
 public class CityReposytoryImpl implements CityRepository {
     Logger log = LogManager.getLogger(getClass());

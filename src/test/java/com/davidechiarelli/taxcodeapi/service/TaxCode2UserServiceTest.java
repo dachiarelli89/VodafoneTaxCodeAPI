@@ -121,6 +121,17 @@ class TaxCode2UserServiceTest {
         });
     }
 
+    @Test
+    void testError_notexistingday(){
+        String taxCode = "NRECRL18R73E388O";
+
+        when(cityRepository.getCityByBelfioreCode(any())).thenReturn(getCityTest2());
+
+        assertThatExceptionOfType(BadDateFormatException.class).isThrownBy(() -> {
+            service.parseUser(taxCode);
+        });
+    }
+
     private Optional<City> getCityTest1(){
         City city = new City();
         city.setDenominazione("Galatina");

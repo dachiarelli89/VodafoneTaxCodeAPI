@@ -9,6 +9,10 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+/**
+ * DTO to manage users to use for tax code calculations
+ */
+
 @Data
 @NoArgsConstructor
 public class UserDTO {
