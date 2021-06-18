@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UtilsTest {
 
     @Test
-    void successUnaccent(){
+    void successClean(){
         String original = "Gisele Bündchen da Conceição --> and remove | \" ! £ $ ? ^";
-        String clean = Utils.unaccent(original);
+        String clean = Utils.cleanString(original);
 
         assertThat(clean)
                 .isNotBlank()

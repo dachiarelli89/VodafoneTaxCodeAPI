@@ -162,7 +162,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateLastNameLetters(User user) {
-        String lastName = Utils.unaccent(Utils.unaccent(user.getLastName()));
+        String lastName = Utils.cleanString(Utils.cleanString(user.getLastName()));
 
         if (StringUtils.isBlank(lastName)) {
             throw new BadRequestException(String.format("Last name %s doesn't contain any valid chars after cleaninig", lastName));
@@ -179,7 +179,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             if (lastNameLetters.length() == 3)
                 break;
             else {
-                if (letter != ' ' && !Utils.isVowel(letter)) {
+                if (!Utils.isVowel(letter)) {
                     lastNameLetters.append(letter);
                 }
             }
@@ -193,7 +193,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateFirstNameLetters(User user) {
-        String firstName = Utils.unaccent(Utils.unaccent(user.getFirstName()));
+        String firstName = Utils.cleanString(Utils.cleanString(user.getFirstName()));
 
         if (StringUtils.isBlank(firstName)) {
             throw new BadRequestException(String.format("First name %s doesn't contain any valid chars after cleaninig", firstName));

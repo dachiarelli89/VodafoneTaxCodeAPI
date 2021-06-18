@@ -28,7 +28,7 @@ public class Utils {
         return letterString.matches("\\w+\\.?");
     }
 
-    public static String unaccent(String original) {
+    public static String cleanString(String original) {
         String clean = Normalizer.normalize(original, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
         clean = clean.replaceAll("[^a-zA-Z]", "");
         return clean;
