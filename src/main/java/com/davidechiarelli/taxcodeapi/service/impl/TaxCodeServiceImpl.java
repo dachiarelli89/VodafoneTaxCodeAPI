@@ -3,6 +3,7 @@ package com.davidechiarelli.taxcodeapi.service.impl;
 import com.davidechiarelli.taxcodeapi.Constants;
 import com.davidechiarelli.taxcodeapi.exception.BadCityFormatException;
 import com.davidechiarelli.taxcodeapi.exception.BadDateFormatException;
+import com.davidechiarelli.taxcodeapi.exception.BadRequestException;
 import com.davidechiarelli.taxcodeapi.exception.UnprocessableDataException;
 import com.davidechiarelli.taxcodeapi.model.City;
 import com.davidechiarelli.taxcodeapi.model.User;
@@ -10,6 +11,7 @@ import com.davidechiarelli.taxcodeapi.repository.CityRepository;
 import com.davidechiarelli.taxcodeapi.repository.impl.CityReposytoryImpl;
 import com.davidechiarelli.taxcodeapi.service.TaxCodeService;
 import com.davidechiarelli.taxcodeapi.utils.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,7 +147,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
     private String generateDayOfBirthLetters(User user) {
         return user.getGender().equalsIgnoreCase("M") ?
-                String.valueOf(user.getDateOfBirth().getDayOfMonth()) :
+                String.format("%02d", user.getDateOfBirth().getDayOfMonth()) :
                 String.valueOf(user.getDateOfBirth().getDayOfMonth() + 40);
     }
 
@@ -160,7 +162,12 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateLastNameLetters(User user) {
-        String lastName = user.getLastName();
+        String lastName = Utils.unaccent(Utils.unaccent(user.getLastName()));
+
+        if(StringUtils.isBlank(lastName)){
+            throw new BadRequestException(String.format("Last name %s doesn't contain any valid chars after cleaninig", lastName));
+        }
+
         StringBuilder lastNameLetters = new StringBuilder();
 
         if (lastName.length() < 3) {
@@ -186,7 +193,12 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private String generateFirstNameLetters(User user) {
-        String firstName = user.getFirstName();
+        String firstName = Utils.unaccent(Utils.unaccent(user.getFirstName()));
+
+        if(StringUtils.isBlank(firstName)){
+            throw new BadRequestException(String.format("First name %s doesn't contain any valid chars after cleaninig", firstName));
+        }
+
         final StringBuilder firstNameLetters = new StringBuilder();
         List<Character> consonants = new ArrayList<>();
 

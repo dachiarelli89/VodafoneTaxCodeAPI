@@ -36,7 +36,7 @@ class AuthControllerTest {
     void calculateTaxCode200() throws Exception {
         when(service.loadUserByUsername("user1")).thenReturn(new org.springframework.security.core.userdetails.User("user1", "pass1", Arrays.asList(new SimpleGrantedAuthority("API"))));
 
-        String jsonRequest="{\n" +
+        String jsonRequest = "{\n" +
                 "  \"username\": \"user1\",\n" +
                 "  \"password\": \"pass1\"" +
                 "}";
@@ -52,18 +52,36 @@ class AuthControllerTest {
     void calculateTaxCode404_userIsNull() throws Exception {
         when(service.loadUserByUsername("user1")).thenReturn(null);
 
-        String jsonRequest="{\n" +
+        String jsonRequest = "{\n" +
                 "  \"username\": \"user1\",\n" +
                 "  \"password\": \"pass1\"" +
                 "}";
 
         assertThatExceptionOfType(NestedServletException.class)
-            .isThrownBy(() ->
-                    mockMvc.perform(post("/auth/token")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(jsonRequest)
-                            .accept(MediaType.APPLICATION_JSON))
-                    );
+                .isThrownBy(() ->
+                        mockMvc.perform(post("/auth/token")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonRequest)
+                                .accept(MediaType.APPLICATION_JSON))
+                );
+    }
+
+    @Test
+    void calculateTaxCode404_wrongPassword() throws Exception {
+        when(service.loadUserByUsername("user1")).thenReturn(new org.springframework.security.core.userdetails.User("user1", "pass1", Arrays.asList(new SimpleGrantedAuthority("API"))));
+
+        String jsonRequest = "{\n" +
+                "  \"username\": \"user1\",\n" +
+                "  \"password\": \"pass2\"" +
+                "}";
+
+        assertThatExceptionOfType(NestedServletException.class)
+                .isThrownBy(() ->
+                        mockMvc.perform(post("/auth/token")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonRequest)
+                                .accept(MediaType.APPLICATION_JSON))
+                );
     }
 
 

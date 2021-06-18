@@ -2,6 +2,7 @@ package com.davidechiarelli.taxcodeapi.utils;
 
 import com.davidechiarelli.taxcodeapi.Constants;
 
+import java.text.Normalizer;
 import java.time.Month;
 import java.util.Map;
 import java.util.Optional;
@@ -25,5 +26,11 @@ public class Utils {
     public static boolean isANameChar(char aLetter){
         String letterString = String.valueOf(aLetter);
         return letterString.matches("\\w+\\.?");
+    }
+
+    public static String unaccent(String original) {
+        String clean = Normalizer.normalize(original, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        clean = clean.replaceAll("[^a-zA-Z]", "");
+        return clean;
     }
 }

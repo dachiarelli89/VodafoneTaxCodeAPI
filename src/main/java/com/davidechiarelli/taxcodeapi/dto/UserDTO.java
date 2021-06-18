@@ -13,10 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserDTO {
     @NotBlank
-    @Pattern(regexp = "^[A-Za-z ,.'-]+$", message = "First name must contain only letters or these chars -> , - . ' and spaces")
     private String firstName;
     @NotBlank
-    @Pattern(regexp = "^[A-Za-z ,.'-]+$", message = "Last name must contain only letters or these chars -> , - . ' and spaces")
     private String lastName;
     @NotNull
     private Gender gender;

@@ -44,6 +44,13 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public final ResponseEntity<ErrorDTO> handleBadRequest(BadRequestException ex, final HttpServletRequest request) {
+        ErrorDTO error = generateErrorDTO(ex, request, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<ErrorDTO> handleUserNotFound(UsernameNotFoundException ex, final HttpServletRequest request) {
