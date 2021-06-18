@@ -213,6 +213,27 @@ class User2TaxCodeServiceTest {
     }
 
     @Test
+    void testSuccess_user11(){
+        User user = getUser11();
+        when(cityRepository.getCityByName(any())).thenReturn(getCity11());
+
+        String taxCode = service.calculateTaxCode(user);
+
+        // GGILAE80A01G337F
+
+        assertThat(taxCode)
+                .isNotEmpty()
+                .hasSize(16);
+        assertThat(taxCode.substring(0, 3)).isEqualTo("GGI");
+        assertThat(taxCode.substring(3, 6)).isEqualTo("LAE");
+        assertThat(taxCode.substring(6, 8)).isEqualTo("80");
+        assertThat(taxCode.substring(8, 9)).isEqualTo("A");
+        assertThat(taxCode.substring(9, 11)).isEqualTo("01");
+        assertThat(taxCode.substring(11, 15)).isEqualTo("G337");
+        assertThat(taxCode.substring(15, 16)).isEqualTo("F");
+    }
+
+    @Test
     void testError_cityNotFound(){
         User user = getUser3();
         when(cityRepository.getCityByName(any())).thenReturn(Optional.empty());
@@ -382,6 +403,22 @@ class User2TaxCodeServiceTest {
     }
 
     private Optional<City> getCity10(){
+        City city = new City();
+        city.setDenominazione("Parma");
+        city.setCodiceCatastale("G337");
+        return Optional.of(city);
+    }
+
+    private User getUser11(){
+        return new User("Alea",
+                "Gigi",
+                "M",
+                LocalDate.of(1980, 1, 1),
+                "Parma",
+                "PR");
+    }
+
+    private Optional<City> getCity11(){
         City city = new City();
         city.setDenominazione("Parma");
         city.setCodiceCatastale("G337");

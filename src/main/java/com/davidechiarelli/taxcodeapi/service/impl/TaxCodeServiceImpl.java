@@ -74,9 +74,9 @@ public class TaxCodeServiceImpl implements TaxCodeService {
             throw new BadCityFormatException("Failed to find city defined with code --> " + taxCode.substring(11, 15));
         }
 
-        char controlLetter = generateControlLetters(new StringBuilder(taxCode.substring(0,15))).charAt(0);
+        char controlLetter = generateControlLetters(new StringBuilder(taxCode.substring(0, 15))).charAt(0);
 
-        if(taxCode.charAt(15) != controlLetter){
+        if (taxCode.charAt(15) != controlLetter) {
             throw new UnprocessableDataException(String.format("Last Tax code char '%s' doesn't match with actual control letter '%s'", taxCode.charAt(15), controlLetter));
         }
 
@@ -121,10 +121,10 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         int sumOfValues = 0;
         int divisionMod = 0;
 
-        for(int counter = 0 ; counter < charsOfTaxCode.length ; counter++){
-            if((counter + 1)  % 2 == 0){
+        for (int counter = 0; counter < charsOfTaxCode.length; counter++) {
+            if ((counter + 1) % 2 == 0) {
                 sumOfValues += Constants.EVEN_CHAR_MAP.get(charsOfTaxCode[counter]);
-            }else{
+            } else {
                 sumOfValues += Constants.ODD_CHAR_MAP.get(charsOfTaxCode[counter]);
             }
         }
@@ -138,7 +138,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
         String city = user.getCityOfBirth();
         Optional<City> cityModel = cityRepository.getCityByName(city);
 
-        if(cityModel.isPresent())
+        if (cityModel.isPresent())
             return cityModel.get().getCodiceCatastale().toUpperCase();
         else {
             throw new BadCityFormatException("City " + city + " doesn't exist.");
@@ -164,7 +164,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     private String generateLastNameLetters(User user) {
         String lastName = Utils.unaccent(Utils.unaccent(user.getLastName()));
 
-        if(StringUtils.isBlank(lastName)){
+        if (StringUtils.isBlank(lastName)) {
             throw new BadRequestException(String.format("Last name %s doesn't contain any valid chars after cleaninig", lastName));
         }
 
@@ -195,7 +195,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     private String generateFirstNameLetters(User user) {
         String firstName = Utils.unaccent(Utils.unaccent(user.getFirstName()));
 
-        if(StringUtils.isBlank(firstName)){
+        if (StringUtils.isBlank(firstName)) {
             throw new BadRequestException(String.format("First name %s doesn't contain any valid chars after cleaninig", firstName));
         }
 
@@ -208,7 +208,7 @@ public class TaxCodeServiceImpl implements TaxCodeService {
 
         for (char letter :
                 firstName.toCharArray()) {
-            if (Utils.isANameChar(letter) && !Utils.isVowel(letter)) {
+            if (!Utils.isVowel(letter)) {
                 consonants.add(letter);
             }
         }
@@ -229,18 +229,17 @@ public class TaxCodeServiceImpl implements TaxCodeService {
     }
 
     private StringBuilder fillWithVowel(StringBuilder nameLetters, String name) {
-        if (nameLetters.length() < 3) {
-            for (char letter :
-                    name.toCharArray()) {
-                if (nameLetters.length() == 3)
-                    break;
-                else {
-                    if (Utils.isANameChar(letter) && Utils.isVowel(letter)) {
-                        nameLetters.append(letter);
-                    }
+        for (char letter :
+                name.toCharArray()) {
+            if (nameLetters.length() == 3)
+                break;
+            else {
+                if (Utils.isVowel(letter)) {
+                    nameLetters.append(letter);
                 }
             }
         }
+
         return nameLetters;
     }
 }
