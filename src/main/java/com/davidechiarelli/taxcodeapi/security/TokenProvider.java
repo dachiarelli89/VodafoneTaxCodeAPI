@@ -84,7 +84,7 @@ public class TokenProvider {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            log.info("Invalid JWT token.");
+            log.warn("Invalid JWT token.");
             log.trace("Invalid JWT token trace.", e);
         }
         return false;
