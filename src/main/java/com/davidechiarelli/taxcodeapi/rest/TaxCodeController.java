@@ -38,7 +38,7 @@ public class TaxCodeController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns the tax code"),
             @ApiResponse(code = 400, message = "Bad request, adjust before retrying", response = ErrorDTO.class),
-            @ApiResponse(code = 403, message = "Unauthorized. Use authentication API to get the JWT token", response = ErrorDTO.class),
+            @ApiResponse(code = 403, message = "Forbidden. Use authentication API to get the JWT token", response = ErrorDTO.class),
             @ApiResponse(code = 422, message = "Unprocessable entity, data syntax is correct but their semantic is wrong", response = ErrorDTO.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDTO.class )
     })
@@ -57,7 +57,7 @@ public class TaxCodeController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns the user associated to that tax code"),
             @ApiResponse(code = 400, message = "Bad request, adjust before retrying", response = ErrorDTO.class),
-            @ApiResponse(code = 403, message = "Unauthorized. Use authentication API to get the JWT token", response = ErrorDTO.class),
+            @ApiResponse(code = 403, message = "Forbidden. Use authentication API to get the JWT token", response = ErrorDTO.class),
             @ApiResponse(code = 422, message = "Unprocessable enttiy, data syntax is correct but their semantic is wrong", response = ErrorDTO.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDTO.class )
     })
